@@ -1,4 +1,7 @@
-const setupInput = function() {
+let connection;
+
+const setupInput = function(conn) {
+  connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding('utf8');
@@ -7,26 +10,31 @@ const setupInput = function() {
   return stdin;
 };
 
-const handleUserInput = function() {
-  const stdin = process.stdin;
-  stdin.on('data', (key) => {
-    process.stdout.write(key);
-    if (key === 'w') {
-      console.log('W');
-    }
-    if (key === 's') {
-      console.log('S');
-    }
-    if (key === 'a') {
-      console.log('A');
-    }
-    if (key === 'd') {
-      console.log('D');
-    }
-    if (key === '\u0003') {
-      process.exit();
-    }
-  });
+const handleUserInput = (key) => {
+  if (key === '\u0003') {
+    process.exit();
+  }
+  if (key === 'w') {
+    console.log("Move: up");
+  }
+  if (key === 'a') {
+    console.log("Move: left");
+  }
+  if (key === 's') {
+    console.log("Move: down");
+  }
+  if (key === 'd') {
+    console.log("Move: right");
+  }
+  if (key === 'g') {
+    console.log("Say: get eaten");
+  }
+  if (key === 'b') {
+    console.log("Say: better luck nextTime");
+  }
+  if (key === 'l') {
+    console.log("Say: LOL");
+  }
 };
 
 module.exports = {
