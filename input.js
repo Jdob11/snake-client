@@ -26,15 +26,6 @@ const handleUserInput = (key) => {
   if (key === 'd') {
     console.log("Move: right");
   }
-  if (key === 'g') {
-    console.log("Say: get eaten");
-  }
-  if (key === 'b') {
-    console.log("Say: better luck nextTime");
-  }
-  if (key === 'l') {
-    console.log("Say: LOL");
-  }
 };
 
 module.exports = {
