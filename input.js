@@ -1,4 +1,4 @@
-const setupInput = function () {
+const setupInput = function() {
   const stdin = process.stdin;
   stdin.setRawMode(true);
   stdin.setEncoding('utf8');
@@ -7,10 +7,22 @@ const setupInput = function () {
   return stdin;
 };
 
-const handleUserInput = function () {
+const handleUserInput = function() {
   const stdin = process.stdin;
   stdin.on('data', (key) => {
     process.stdout.write(key);
+    if (key === 'w') {
+      console.log('W');
+    }
+    if (key === 's') {
+      console.log('S');
+    }
+    if (key === 'a') {
+      console.log('A');
+    }
+    if (key === 'd') {
+      console.log('D');
+    }
     if (key === '\u0003') {
       process.exit();
     }
