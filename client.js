@@ -8,17 +8,23 @@ const connect = function() {
     port: PORT
   });
 
+  // interpret incoming data as text
+  conn.setEncoding('utf8');
+  
+  //confirm connection
+  conn.on('connect', () => {
+    console.log('Connection Established');
+  });
+
+  //set player name
+  conn.on('connect', () => {
+    conn.write('Name: Egg');
+  });
+
+  //console log on data
   conn.on('data', (data) => {
     console.log('data: ', data);
   });
-
-  conn.on('connect', () => {
-    console.log('Connection Established');
-    conn.write('Name: JBD');
-  });
-
-  // interpret incoming data as text
-  conn.setEncoding('utf8');
 
   return conn;
 };
