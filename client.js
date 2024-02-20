@@ -23,10 +23,6 @@ const connect = function () {
     conn.write("Name: EGG");
   });
 
-  conn.on("connect", () => {
-    conn.write("Move: up");
-  });
-
   return conn;
 };
 
