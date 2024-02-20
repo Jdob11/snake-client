@@ -1,15 +1,27 @@
 let connection;
-
 let directionInterval;
 
 const handleUserInput = function (key) {
+  //exit when ctrl + c is pressed
   if (key === '\u0003') {
     process.exit();
   }
 
-  if (directionInterval) {
-    clearInterval(directionInterval);
+  //say message when key is pressed
+  if (key === 'q') {
+    connection.write('Say: SsSSSsssSSssssss');
+  } else if (key === 'e') {
+    connection.write('Say: Letssss do thisss!');
   }
+
+  if (['w', 's', 'a', 'd'].includes(key)) {
+    move(key);
+  }
+};
+
+//enable continuous movement on key press, and clear interval and set new direction when new key is pressed (change interval to increase or decrease speed/difficulty)
+function move(key) {
+  clearInterval(directionInterval);
 
   if (key === 'w') {
     directionInterval = setInterval(() => {
@@ -28,9 +40,9 @@ const handleUserInput = function (key) {
       connection.write('Move: right');
     }, 75);
   }
-};
+}
 
-
+//set up to interpret user input
 const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin;
