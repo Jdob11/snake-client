@@ -1,11 +1,12 @@
 const { CONNREFUSED } = require("dns");
 const net = require("net");
+const { IP, PORT } = require('./constants')
 
 // establishes a connection with the game server
 const connect = function () {
   const conn = net.createConnection({
-    host: 'localhost',
-    port: 50541
+    host: IP,
+    port: PORT
   });
 
   // interpret incoming data as text
@@ -21,7 +22,7 @@ const connect = function () {
     console.log('Successfully connected to game server');
   });
 
-  // assin 3 letter name or initials to snake
+  // assign 3 letter name or initials to snake
   conn.on("connect", () => {
     conn.write("Name: EGG");
   });

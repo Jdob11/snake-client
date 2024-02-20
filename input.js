@@ -1,3 +1,5 @@
+const { messageMappings, directionMappings } = require('./constants');
+
 let connection;
 let directionInterval;
 
@@ -8,12 +10,11 @@ const handleUserInput = function (key) {
   }
 
   //say message when key is pressed
-  if (key === 'q') {
-    connection.write('Say: SsSSSsssSSssssss');
-  } else if (key === 'e') {
-    connection.write('Say: Letssss do thisss!');
+  if (messageMappings[key]) {
+    connection.write(messageMappings[key]);
   }
 
+  //run move function only for mapped keys
   if (['w', 's', 'a', 'd'].includes(key)) {
     move(key);
   }
@@ -23,21 +24,9 @@ const handleUserInput = function (key) {
 function move(key) {
   clearInterval(directionInterval);
 
-  if (key === 'w') {
+  if (directionMappings[key]) {
     directionInterval = setInterval(() => {
-      connection.write('Move: up');
-    }, 75);
-  } else if (key === 's') {
-    directionInterval = setInterval(() => {
-      connection.write('Move: down');
-    }, 75);
-  } else if (key === 'a') {
-    directionInterval = setInterval(() => {
-      connection.write('Move: left');
-    }, 75);
-  } else if (key === 'd') {
-    directionInterval = setInterval(() => {
-      connection.write('Move: right');
+      connection.write(`Move: ${directionMappings[key]}`);
     }, 75);
   }
 }
