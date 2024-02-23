@@ -10,10 +10,17 @@ const directionMappings = {
   'a': 'left',
   'd': 'right'
 };
+const directionOpposites = {
+  'w': 's',
+  's': 'w',
+  'a': 'd',
+  'd': 'a'
+};
 
 module.exports = {
   IP,
   PORT,
   messageMappings,
   directionMappings,
+  directionOpposites
 }

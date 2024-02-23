@@ -1,7 +1,8 @@
-const { messageMappings, directionMappings } = require('./constants');
+const { messageMappings, directionMappings, directionOpposites } = require('./constants');
 
 let connection;
 let directionInterval;
+let currentDirection;
 
 const handleUserInput = function (key) {
   //exit when ctrl + c is pressed
@@ -22,9 +23,14 @@ const handleUserInput = function (key) {
 
 //enable continuous movement on key press, and clear interval and set new direction when new key is pressed (change interval to increase or decrease speed/difficulty)
 function move(key) {
-  clearInterval(directionInterval);
+  if (key !== directionOpposites[currentDirection]) {
+    clearInterval(directionInterval);
+  };
 
   if (directionMappings[key]) {
+    if (key !== directionOpposites[currentDirection]) {
+    currentDirection = key;
+    }
     directionInterval = setInterval(() => {
       connection.write(`Move: ${directionMappings[key]}`);
     }, 75);
