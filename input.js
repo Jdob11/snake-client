@@ -25,10 +25,7 @@ const handleUserInput = function(key) {
   }
 
   //run move function only for mapped keys
-  if (key === directionOpposites[currentKey]) return;
-
-  // set current key
-  if (isValidKey(key)) {
+  if (key !== directionOpposites[currentKey] && isValidKey(key)) {
   currentKey = key;
   };
   
