@@ -8,6 +8,7 @@ let moveInterval = setInterval(() => {
   move(currentKey);
 }, 100);
 
+//function to use in if statements to check if key press is valid movement key
 const isValidKey = key => ['w', 's', 'a', 'd'].includes(key);
 
 const handleUserInput = function(key) {
