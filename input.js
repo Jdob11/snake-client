@@ -3,6 +3,7 @@ const { messageMappings, directionMappings, directionOpposites } = require('./co
 let connection;
 let currentKey;
 
+//set global interval to accept current direction based on key press
 let moveInterval = setInterval(() => {
   move(currentKey);
 }, 100);
@@ -27,6 +28,7 @@ const handleUserInput = function(key) {
   
 };
 
+//function to ensure buttons pressed are moved keys and send move message to server
 const move = function(key) {
   if (['w', 's', 'a', 'd'].includes(key)) {
     connection.write(`Move: ${directionMappings[key]}`);

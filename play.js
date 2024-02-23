@@ -2,7 +2,7 @@ const {connect} = require("./client");
 const {setupInput} = require("./input");
 
 console.log("Connecting ...");
-// pass connection object into setupInput to allow for user input
+// function call to create connection object that allows user input and readline initials input by user
 connect((conn, initials) => {
   setupInput(conn, initials);
 });
