@@ -13,8 +13,7 @@ const isValidKey = key => ['w', 's', 'a', 'd'].includes(key);
 
 const handleUserInput = function(key) {
   //exit when ctrl + c is pressed
-  if (key === '\u0003') {
-    moveInterval.clearInterval();
+  if (key === '\u0003') { 
     process.exit();
   }
 
