@@ -1,12 +1,16 @@
 const { messageMappings, directionMappings, directionOpposites } = require('./constants');
 
 let connection;
-let directionInterval;
-let currentDirection;
+let currentKey;
 
-const handleUserInput = function (key) {
+let moveInterval = setInterval(() => {
+  move(currentKey);
+}, 100);
+
+const handleUserInput = function(key) {
   //exit when ctrl + c is pressed
   if (key === '\u0003') {
+    moveInterval.clearInterval();
     process.exit();
   }
 
@@ -16,29 +20,21 @@ const handleUserInput = function (key) {
   }
 
   //run move function only for mapped keys
+  if (key === directionOpposites[currentKey]) return;
+
+  // set current key
+  currentKey = key;
+  
+};
+
+const move = function(key) {
   if (['w', 's', 'a', 'd'].includes(key)) {
-    move(key);
+    connection.write(`Move: ${directionMappings[key]}`);
   }
 };
 
-//enable continuous movement on key press, and clear interval and set new direction when new key is pressed (change interval to increase or decrease speed/difficulty)
-function move(key) {
-  if (key !== directionOpposites[currentDirection]) {
-    clearInterval(directionInterval);
-  };
-
-  if (directionMappings[key]) {
-    if (key !== directionOpposites[currentDirection]) {
-    currentDirection = key;
-    }
-    directionInterval = setInterval(() => {
-      connection.write(`Move: ${directionMappings[key]}`);
-    }, 75);
-  }
-}
-
 //set up to interpret user input
-const setupInput = function (conn) {
+const setupInput = function(conn) {
   connection = conn;
   const stdin = process.stdin;
   stdin.setRawMode(true);
@@ -50,4 +46,4 @@ const setupInput = function (conn) {
 
 module.exports = {
   setupInput,
-}
+};
