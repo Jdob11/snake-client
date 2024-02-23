@@ -14,13 +14,13 @@ const handleUserInput = function(key) {//function to set up how user can interac
   if (messageMappings[key]) {  //say message when appropriate key is pressed
     connection.write(messageMappings[key]);
   }
-  if (key !== directionOpposites[currentKey] && isValidKey(key)) {  //run move function only for mapped keys
+  if (key !== directionOpposites[currentKey] && isValidKey(key)) {  //set current direction key if key pressed is not opposite of existing direction and is a valid movement key
     currentKey = key;
   };
   
 };
 
-const move = function() {//function to ensure buttons pressed are moved keys and send move message to server
+const move = function() {//function to ensure current direction key is valid movement key and send move message to server
   if (isValidKey(currentKey)) {
     connection.write(`Move: ${directionMappings[currentKey]}`);
   }
