@@ -17,7 +17,6 @@ const handleUserInput = function(key) {//function to set up how user can interac
   if (key !== directionOpposites[currentKey] && isValidKey(key)) {//set current direction key if key pressed is not opposite of existing direction and is a valid movement key
     currentKey = key;
   };
-  
 };
 
 const move = function() {//function to ensure current direction key is valid movement key and send move message to server
