@@ -2,43 +2,35 @@ const net = require("net");
 const { IP, PORT } = require('./constants');
 const readline = require('readline');
 
-// setup standard user input/output interface
-const rl = readline.createInterface({
+const rl = readline.createInterface({// setup standard user input/output interface
   input: process.stdin,
   output: process.stdout
 });
 
-//function to ask user for initials, then call callback with initials as argument
-const promptForInitials = (callback) => {
+const promptForInitials = (callback) => {//function to ask user for initials, then call callback with initials as argument
   rl.question('Enter your initials (Maximum 3 characters): ', (name) => {
     rl.close();
     callback(name);
   });
 };
 
-// establishes a connection with the game server
-const connect = function(callback) {
+const connect = function(callback) {// establishes a connection with the game server
   const conn = net.createConnection({
     host: IP,
     port: PORT
   });
 
-  // interpret incoming data as text
-  conn.setEncoding("utf8");
+  conn.setEncoding("utf8");// interpret incoming data as text
 
-  // log data received on connection to console
-  conn.on('data', (data) => {
+  conn.on('data', (data) => {// log data received on connection to console
     console.log(data);
   });
 
-  // log success message when connection is made
-  conn.on('connect', () => {
-    console.log('Successfully connected to game server');
-    // run prompt for initals and write to server when connection is established
+  conn.on('connect', () => {// log success message when connection is made
+    console.log('Successfully connected to game server');// run prompt for initials and write to server when connection is established
     promptForInitials((initials) => {
       conn.write(`Name: ${initials}`);
-      // pass connection and initials to the callback
-      callback(conn, initials);
+      callback(conn, initials);// pass connection and initials to the callback
     });
   });
 };

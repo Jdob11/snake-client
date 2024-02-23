@@ -3,18 +3,18 @@ const { messageMappings, directionMappings, directionOpposites } = require('./co
 let connection;
 let currentKey;
 
-const isValidKey = function(key) { //function to use in if statements to check if key press is valid movement key
+const isValidKey = function(key) {//function to use in if statements to check if key press is valid movement key
   return ['w', 's', 'a', 'd'].includes(key);
 };
 
 const handleUserInput = function(key) {//function to set up how user can interact with server
-  if (key === '\u0003') {   //exit when ctrl + c is pressed
+  if (key === '\u0003') {//exit when ctrl + c is pressed
     process.exit();
   }
-  if (messageMappings[key]) {  //say message when appropriate key is pressed
+  if (messageMappings[key]) {//say message when appropriate key is pressed
     connection.write(messageMappings[key]);
   }
-  if (key !== directionOpposites[currentKey] && isValidKey(key)) {  //set current direction key if key pressed is not opposite of existing direction and is a valid movement key
+  if (key !== directionOpposites[currentKey] && isValidKey(key)) {//set current direction key if key pressed is not opposite of existing direction and is a valid movement key
     currentKey = key;
   };
   
