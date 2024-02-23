@@ -8,6 +8,8 @@ let moveInterval = setInterval(() => {
   move(currentKey);
 }, 100);
 
+const isValidKey = key => ['w', 's', 'a', 'd'].includes(key);
+
 const handleUserInput = function(key) {
   //exit when ctrl + c is pressed
   if (key === '\u0003') {
@@ -24,13 +26,15 @@ const handleUserInput = function(key) {
   if (key === directionOpposites[currentKey]) return;
 
   // set current key
+  if (isValidKey(key)) {
   currentKey = key;
+  };
   
 };
 
 //function to ensure buttons pressed are moved keys and send move message to server
 const move = function(key) {
-  if (['w', 's', 'a', 'd'].includes(key)) {
+  if (isValidKey(key)) {
     connection.write(`Move: ${directionMappings[key]}`);
   }
 };
