@@ -1,5 +1,5 @@
-const IP = 'localhost'
-const PORT = 50541
+const IP = 'localhost';
+const PORT = 50541;
 const messageMappings = {
   'q': 'Say: SsSSSsssSSssssss',
   'e': 'Say: Letssss do thisss!'
@@ -23,4 +23,4 @@ module.exports = {
   messageMappings,
   directionMappings,
   directionOpposites
-}
+};

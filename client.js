@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 const { CONNREFUSED } = require("dns");
 const net = require("net");
 const { IP, PORT } = require('./constants');
@@ -18,7 +19,7 @@ const promptForInitials = (callback) => {
 };
 
 // establishes a connection with the game server
-const connect = function (callback) {
+const connect = function(callback) {
   const conn = net.createConnection({
     host: IP,
     port: PORT
@@ -46,7 +47,6 @@ const connect = function (callback) {
     });
   });
 };
-
 
 module.exports = {
   connect,
