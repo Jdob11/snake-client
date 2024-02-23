@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-unused-vars
-const { CONNREFUSED } = require("dns");
 const net = require("net");
 const { IP, PORT } = require('./constants');
 const readline = require('readline');
@@ -36,10 +34,7 @@ const connect = function(callback) {
   // log success message when connection is made
   conn.on('connect', () => {
     console.log('Successfully connected to game server');
-  });
-
-  // run prompt for initals and write to server when connection is established
-  conn.on("connect", () => {
+    // run prompt for initals and write to server when connection is established
     promptForInitials((initials) => {
       conn.write(`Name: ${initials}`);
       // pass connection and initials to the callback

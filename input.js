@@ -4,7 +4,7 @@ let connection;
 let currentKey;
 
 //set global interval to accept current direction based on key press
-let moveInterval = setInterval(() => {
+setInterval(() => {
   move(currentKey);
 }, 100);
 
